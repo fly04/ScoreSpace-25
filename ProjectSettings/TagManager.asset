@@ -47,6 +47,9 @@ TagManager:
   - name: Shadow
     uniqueID: 3263688943
     locked: 0
+  - name: Cache
+    uniqueID: 4035309445
+    locked: 0
   - name: Spider
     uniqueID: 2866105487
     locked: 0

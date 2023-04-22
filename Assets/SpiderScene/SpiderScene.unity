@@ -2077,7 +2077,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 924086d95bff64043843dc26d3b89981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cache: {fileID: 2088010935828134627, guid: 2a73e18f525134edd9dd2039ec98938e, type: 3}
+  elements:
+  - {fileID: 1422838158265681714, guid: 9e6f513272d337b4fb9176d31671fee9, type: 3}
+  - {fileID: 1422838158265681714, guid: 1acfb108c31b7e74588328c6283d95e0, type: 3}
+  - {fileID: 1422838158265681714, guid: 4f7e6e328c2326147a651587558db392, type: 3}
+  spawnChances:
+  - 1
+  - 1
+  - 1
   spawnRate: 2
 --- !u!4 &1560949341
 Transform:
@@ -2165,7 +2172,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1428861809
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
