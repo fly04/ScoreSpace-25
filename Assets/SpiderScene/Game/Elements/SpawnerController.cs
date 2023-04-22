@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpawnerController : MonoBehaviour
 {
     [SerializeField] GameObject[] elements;
+    [SerializeField] float[] spawnChances;
     [SerializeField] bool isStopped = false;
 
     private int currentIndex = 0;
@@ -55,9 +56,31 @@ public class SpawnerController : MonoBehaviour
         }
     }
 
-    public void SpawnPrefab()
+    GameObject getRandomPrefab()
     {
-        GameObject selectedPrefab = elements[currentIndex];
+        float totalChance = 0;
+        for (int i = 0; i < spawnChances.Length; i++)
+        {
+            totalChance += spawnChances[i];
+        }
+        float randomValue = Random.Range(0f, totalChance);
+        float tempSum = 0;
+        int prefabIndex = -1;
+        for (int i = 0; i < elements.Length; i++)
+        {
+            tempSum += spawnChances[i];
+            if (randomValue <= tempSum)
+            {
+                prefabIndex = i;
+                break;
+            }
+        }
+        return elements[prefabIndex];
+    }
+
+    void SpawnPrefab()
+    {
+        GameObject selectedPrefab = getRandomPrefab();
 
         // Récupérer la largeur de l'objet sélectionné
         float selectedPrefabWidth = GetObjectWidth(selectedPrefab);
@@ -77,8 +100,6 @@ public class SpawnerController : MonoBehaviour
         }
 
         lastObject = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
-
-        currentIndex = (currentIndex + 1) % elements.Length;
     }
 
     private float GetObjectWidth(GameObject prefab)
