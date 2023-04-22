@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class SpawnerController : MonoBehaviour
 {
-
     [SerializeField] GameObject[] elements;
-    [SerializeField] float[] spawnChances;
-    [SerializeField] float spawnRate = 2;
     [SerializeField] bool isStopped = false;
 
-    private float timer = 0;
+    private int currentIndex = 0;
+    private GameObject lastObject = null;
 
     void Start()
     {
@@ -23,18 +21,27 @@ public class SpawnerController : MonoBehaviour
 
         if (!isStopped)
         {
-            if (timer < spawnRate)
+            GameObject currentElement = elements[currentIndex];
+            ElementController elementController = currentElement.GetComponent<ElementController>();
+            float objectSpeed = elementController.moveSpeed;
+
+            if (lastObject != null)
             {
-                timer += Time.deltaTime;
+                Renderer lastObjectRenderer = lastObject.GetComponent<Renderer>();
+                float lastObjectEndPosition = lastObject.transform.position.x + (lastObjectRenderer.bounds.size.x / 2);
+                float distanceToLastObject = transform.position.x - lastObjectEndPosition;
+
+                if (distanceToLastObject > GetObjectWidth(currentElement) / 2)
+                {
+                    SpawnPrefab();
+                }
             }
             else
             {
                 SpawnPrefab();
-                timer = 0;
             }
         }
     }
-
 
     void handleInputs()
     {
@@ -47,23 +54,40 @@ public class SpawnerController : MonoBehaviour
             isStopped = false;
         }
     }
+
     public void SpawnPrefab()
     {
-        float totalChance = 0;
-        for (int i = 0; i < spawnChances.Length; i++)
+        GameObject selectedPrefab = elements[currentIndex];
+
+        // Récupérer la largeur de l'objet sélectionné
+        float selectedPrefabWidth = GetObjectWidth(selectedPrefab);
+
+        // Instancier l'objet sélectionné juste à côté de l'objet précédent
+        Vector3 spawnPosition;
+        if (lastObject != null)
         {
-            totalChance += spawnChances[i];
+            Renderer lastObjectRenderer = lastObject.GetComponent<Renderer>();
+            float lastObjectWidth = lastObjectRenderer.bounds.size.x;
+            float lastObjectEndPosition = lastObject.transform.position.x + (lastObjectWidth / 2);
+            spawnPosition = new Vector3(lastObjectEndPosition + (selectedPrefabWidth / 2), transform.position.y, transform.position.z);
         }
-        float randomValue = Random.Range(0f, totalChance);
-        float tempSum = 0;
-        for (int i = 0; i < elements.Length; i++)
+        else
         {
-            tempSum += spawnChances[i];
-            if (randomValue <= tempSum)
-            {
-                Instantiate(elements[i], transform.position, Quaternion.identity);
-                break;
-            }
+            spawnPosition = new Vector3(transform.position.x + (selectedPrefabWidth / 2), transform.position.y, transform.position.z);
         }
+
+        lastObject = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
+
+        currentIndex = (currentIndex + 1) % elements.Length;
+    }
+
+    private float GetObjectWidth(GameObject prefab)
+    {
+        Renderer objectRenderer = prefab.GetComponent<Renderer>();
+        if (objectRenderer != null)
+        {
+            return objectRenderer.bounds.size.x;
+        }
+        return 0f;
     }
 }
