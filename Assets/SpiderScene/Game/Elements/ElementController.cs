@@ -8,6 +8,7 @@ public class ElementController : MonoBehaviour
     [SerializeField] ScoresManager scoresManager;
     [SerializeField] bool isStopped = false;
     public float moveSpeed = 5;
+    public float deadZone = -5;
     bool hasBeenCounted = false;
 
     void Start()
@@ -20,6 +21,9 @@ public class ElementController : MonoBehaviour
     {
         handleInputs();
         move();
+        if(transform.position.x < deadZone){
+            Destroy(gameObject);
+        }
     }
 
     void move()
