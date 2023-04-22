@@ -11,9 +11,12 @@ public class ElementController : MonoBehaviour
     public float deadZone = -5;
     bool hasBeenCounted = false;
 
+    GameController gameController;
+
     void Start()
     {
         scoresManager = GameObject.Find("ScoresManager").GetComponent<ScoresManager>();
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
     // Update is called once per frame
@@ -21,7 +24,8 @@ public class ElementController : MonoBehaviour
     {
         handleInputs();
         move();
-        if(transform.position.x < deadZone){
+        if (transform.position.x < deadZone)
+        {
             Destroy(gameObject);
         }
     }
@@ -30,7 +34,11 @@ public class ElementController : MonoBehaviour
     {
         if (!isStopped)
         {
-            transform.position = transform.position + (Vector3.left * moveSpeed) * Time.deltaTime;
+            if (gameObject.tag == "Menace" || gameObject.tag == "Nothing")
+            {
+                transform.position = new Vector3(transform.position.x, -3.07f, transform.position.z);
+            }
+            transform.position = transform.position + (Vector3.left * moveSpeed * gameController.multiplier) * Time.deltaTime;
         }
     }
 

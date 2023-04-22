@@ -14,10 +14,12 @@ public class SpiderController : MonoBehaviour
     Vector3 startPosition;
     [SerializeField] bool isStopped = false;
     int time = 0;
+    GameController gameController;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
         startPosition = transform.position;
     }
 
@@ -48,7 +50,7 @@ public class SpiderController : MonoBehaviour
     {
         if (!isStopped)
         {
-            float newYPosition = startPosition.y + Mathf.Sin(time * verticalFrequency) * verticalAmplitude;
+            float newYPosition = startPosition.y + Mathf.Sin(time * verticalFrequency * gameController.multiplier) * verticalAmplitude;
             transform.position = new Vector3(transform.position.x, newYPosition, transform.position.z);
         }
     }

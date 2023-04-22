@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 150
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5644d2e78d8a54f4c8ef5343f38c648e
-      internalID: 943849642
+      spriteID: 306391264382e7b43b7ba2e6921f3094
+      internalID: 1884013149
       vertices: []
       indices: 
       edges: []
@@ -152,8 +152,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36ecee8e28d6f7d4ea09a80062e79db0
-      internalID: -653920507
+      spriteID: 10532ddbde94fcc43911e3855c20cab8
+      internalID: 1585647250
       vertices: []
       indices: 
       edges: []
@@ -173,8 +173,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b880bb888c3c145489a80666ea11ad3e
-      internalID: -1162106231
+      spriteID: 9075c725f99396647b8c5ea38d5a2a70
+      internalID: 1711147657
       vertices: []
       indices: 
       edges: []
@@ -194,8 +194,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ce191927ec303e45ba882d25e385667
-      internalID: -2115770561
+      spriteID: e3f4716ccbe13b54995e43bfcbc16665
+      internalID: 34910963
       vertices: []
       indices: 
       edges: []
@@ -215,8 +215,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2be99c2215e07fe4395ca1157db64925
-      internalID: -1053526325
+      spriteID: b1e8bdf74c71af54e9843106e1830d8f
+      internalID: -1077898797
       vertices: []
       indices: 
       edges: []
@@ -232,11 +232,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      perso_0: 943849642
-      perso_1: -653920507
-      perso_2: -1162106231
-      perso_3: -2115770561
-      perso_4: -1053526325
+      perso_0: 1884013149
+      perso_1: 1585647250
+      perso_2: 1711147657
+      perso_3: 34910963
+      perso_4: -1077898797
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

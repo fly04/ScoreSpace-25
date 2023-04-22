@@ -98,7 +98,13 @@ public class SpawnerController : MonoBehaviour
         {
             spawnPosition = new Vector3(transform.position.x + (selectedPrefabWidth / 2), transform.position.y, transform.position.z);
         }
-
+        if (lastObject != null)
+        {
+            if (lastObject.tag == "Menace")
+            {
+                if (lastObject.GetComponent<MenaceController>().type == 0) lastObject.GetComponent<MenaceController>().isActive = true;
+            }
+        }
         lastObject = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
     }
 
@@ -111,4 +117,6 @@ public class SpawnerController : MonoBehaviour
         }
         return 0f;
     }
+
+
 }
