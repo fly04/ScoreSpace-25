@@ -8,36 +8,45 @@ public class SpawnerController : MonoBehaviour
     [SerializeField] GameObject[] elements;
     [SerializeField] float[] spawnChances;
     [SerializeField] float spawnRate = 2;
+    [SerializeField] bool isStopped = false;
 
     private float timer = 0;
 
-    // Start is called before the first frame update
     void Start()
     {
-        // SpawnCache();
         SpawnPrefab();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (timer < spawnRate)
+        handleInputs();
+
+        if (!isStopped)
         {
-            timer += Time.deltaTime;
-        }
-        else
-        {
-            // SpawnCache();
-            SpawnPrefab();
-            timer = 0;
+            if (timer < spawnRate)
+            {
+                timer += Time.deltaTime;
+            }
+            else
+            {
+                SpawnPrefab();
+                timer = 0;
+            }
         }
     }
 
-    // void SpawnCache()
-    // {
-    //     Instantiate(cache, transform.position, transform.rotation);
-    // }
 
+    void handleInputs()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            isStopped = true;
+        }
+        else
+        {
+            isStopped = false;
+        }
+    }
     public void SpawnPrefab()
     {
         float totalChance = 0;
