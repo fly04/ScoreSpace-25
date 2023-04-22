@@ -7,16 +7,26 @@ using UnityEngine.SceneManagement;
 public class ScoresManager : MonoBehaviour
 {
     public int score = 0;
-    [SerializeField] Leaderboard leaderboard;
+    [SerializeField] LeaderboardController leaderboard;
     [SerializeField] bool isDebug;
 
     void Start()
     {
-        // Identify the player
-        StartCoroutine(LoginRoutine());
+        StartCoroutine(InitRoutine());
+    }
 
-        // Fetch the top scores
-        StartCoroutine(leaderboard.FetchTopHighScoresRoutine());
+    IEnumerator InitRoutine()
+    {
+        yield return StartCoroutine(LoginRoutine());
+        yield return StartCoroutine(leaderboard.FetchTopHighScoresRoutine());
+        yield return StartCoroutine(leaderboard.FetchPlayerRankRoutine());
+    }
+
+    IEnumerator RefreshLeaderboardRoutine()
+    {
+        yield return StartCoroutine(SubmitScoreRoutine(score));
+        yield return StartCoroutine(leaderboard.FetchTopHighScoresRoutine());
+        yield return StartCoroutine(leaderboard.FetchPlayerRankRoutine());
     }
 
     IEnumerator LoginRoutine()
@@ -58,8 +68,6 @@ public class ScoresManager : MonoBehaviour
             }
         });
         yield return new WaitWhile(() => !done);
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void addScore(int scoreToAdd)
