@@ -29,7 +29,6 @@ public class SpiderController : MonoBehaviour
     void FixedUpdate()
     {
         move();
-
         if (!isStopped) time++;
     }
 
