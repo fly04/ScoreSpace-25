@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using LootLocker.Requests;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class ScoresManager : MonoBehaviour
 {
     public int score = 0;
     [SerializeField] LeaderboardController leaderboard;
+    [SerializeField] TextMeshProUGUI[] scores;
     [SerializeField] bool isDebug;
 
     void Start()
@@ -73,5 +75,9 @@ public class ScoresManager : MonoBehaviour
     public void addScore(int scoreToAdd)
     {
         score += scoreToAdd;
+        for (int i = 0; i < scores.Length; i++)
+        {
+            scores[i].text = score.ToString();
+        }
     }
 }
