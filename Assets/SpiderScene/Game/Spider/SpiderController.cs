@@ -16,9 +16,12 @@ public class SpiderController : MonoBehaviour
     int time = 0;
     GameController gameController;
 
+    Animator animator;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         startPosition = transform.position;
     }
@@ -31,7 +34,12 @@ public class SpiderController : MonoBehaviour
     void FixedUpdate()
     {
         move();
-        if (!isStopped) time++;
+        if (!isStopped)
+        {
+            time++;
+            animator.CrossFade("run", 0.1f);
+        }
+        else animator.CrossFade("wait", 0.1f);
     }
 
     void handleInputs()
