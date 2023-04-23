@@ -13,7 +13,7 @@ public class KillerController1 : MonoBehaviour
     [SerializeField] float speed = 15f;
     [SerializeField] GameObject target;
     [SerializeField] float limitRight = 1.7f;
-    [SerializeField] float limitLeft = -1.3f;
+    // [SerializeField] float limitLeft = -1.3f;
     GameObject previousTarget;
 
     void Start()
