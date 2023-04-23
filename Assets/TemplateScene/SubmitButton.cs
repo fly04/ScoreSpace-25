@@ -6,9 +6,9 @@ public class SubmitButton : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
 
-    private void OnMouseDown()
-    {
-        Debug.Log("Submit button clicked");
-        StartCoroutine(gameManager.SubmitScoreRoutine(gameManager.score));
-    }
+    // private void OnMouseDown()
+    // {
+    //     Debug.Log("Submit button clicked");
+    //     StartCoroutine(gameManager.SubmitScoreRoutine(gameManager.score));
+    // }
 }

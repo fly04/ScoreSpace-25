@@ -975,12 +975,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11da664c0e0c02d4bb7201945b06a308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNames: {fileID: 1769292739}
-  playerScores: {fileID: 50332753}
-  playerName: {fileID: 713920596}
-  playerScore: {fileID: 1029367992}
-  id: 13575
-  isDebug: 0
 --- !u!4 &812623225
 Transform:
   m_ObjectHideFlags: 0
@@ -1194,7 +1188,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
-  leaderboard: {fileID: 812623224}
   scores:
   - {fileID: 1489996509}
   - {fileID: 393581981}
@@ -2103,10 +2096,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elements:
-  - {fileID: 4523823002136644265, guid: 8045273c1217dbc49a00175b284fda06, type: 3}
-  - {fileID: 7236419679188354019, guid: 80c18e2d01ec298469ad093797a06138, type: 3}
   - {fileID: 6154656486842034780, guid: e41deb6a67873614ab02328a10f6c77d, type: 3}
+  - {fileID: 7236419679188354019, guid: 80c18e2d01ec298469ad093797a06138, type: 3}
+  - {fileID: 4523823002136644265, guid: 8045273c1217dbc49a00175b284fda06, type: 3}
+  - {fileID: 5277385548656918419, guid: 0024a24cdaedcd944874f30330c23ef5, type: 3}
+  - {fileID: 4595553636858507037, guid: 36db369432b08454986c1df5f7f86cf9, type: 3}
   spawnChances:
+  - 2
+  - 2
   - 2
   - 2
   - 2
@@ -2491,7 +2488,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1933765875}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -3, z: 0}
+  m_LocalPosition: {x: 0, y: -3.57, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
