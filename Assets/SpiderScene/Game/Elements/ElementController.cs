@@ -11,12 +11,14 @@ public class ElementController : MonoBehaviour
     public float deadZone = -5;
     bool hasBeenCounted = false;
 
+    [SerializeField] SpiderController spider;
     GameController gameController;
 
     void Start()
     {
         scoresManager = GameObject.Find("ScoresManager").GetComponent<ScoresManager>();
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        spider = GameObject.Find("Spider").GetComponent<SpiderController>();
     }
 
     // Update is called once per frame
@@ -32,7 +34,7 @@ public class ElementController : MonoBehaviour
 
     void move()
     {
-        if (!isStopped)
+        if (!isStopped && spider.isAlive)
         {
             if (gameObject.tag == "Menace" || gameObject.tag == "Nothing")
             {

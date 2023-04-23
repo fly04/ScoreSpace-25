@@ -18,6 +18,9 @@ public class SpiderController : MonoBehaviour
 
     Animator animator;
 
+    public bool isSafe = false;
+    public bool isAlive = true;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -61,5 +64,27 @@ public class SpiderController : MonoBehaviour
             float newYPosition = startPosition.y + Mathf.Sin(time * verticalFrequency * gameController.multiplier) * verticalAmplitude;
             transform.position = new Vector3(transform.position.x, newYPosition, transform.position.z);
         }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Cache")
+        {
+            isSafe = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Cache")
+        {
+            isSafe = false;
+        }
+    }
+
+    public void die()
+    {
+        GetComponent<SpriteRenderer>().enabled = false;
+        isAlive = false;
     }
 }

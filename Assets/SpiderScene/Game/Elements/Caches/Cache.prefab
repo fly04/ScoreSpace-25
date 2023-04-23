@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cache
       objectReference: {fileID: 0}
+    - target: {fileID: 74940539458157259, guid: e34ac86d7fd70e34da5443f092e4d91d, type: 3}
+      propertyPath: m_TagString
+      value: Cache
+      objectReference: {fileID: 0}
     - target: {fileID: 5441176888329892878, guid: e34ac86d7fd70e34da5443f092e4d91d, type: 3}
       propertyPath: m_RootOrder
       value: 0

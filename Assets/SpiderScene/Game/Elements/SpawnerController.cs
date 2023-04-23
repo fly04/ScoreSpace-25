@@ -11,16 +11,21 @@ public class SpawnerController : MonoBehaviour
     private int currentIndex = 0;
     private GameObject lastObject = null;
 
+    [SerializeField] SpiderController spider;
+
+    int nothingCount = 0;
+
     void Start()
     {
         SpawnPrefab();
+        spider = GameObject.Find("Spider").GetComponent<SpiderController>();
     }
 
     void Update()
     {
         handleInputs();
 
-        if (!isStopped)
+        if (!isStopped && spider.isAlive)
         {
             GameObject currentElement = elements[currentIndex];
             ElementController elementController = currentElement.GetComponent<ElementController>();
@@ -75,6 +80,22 @@ public class SpawnerController : MonoBehaviour
                 break;
             }
         }
+
+        if (prefabIndex == 0)
+        {
+            nothingCount++;
+        }
+        else
+        {
+            nothingCount = 0;
+        }
+
+        if (nothingCount >= 4)
+        {
+            prefabIndex = Random.Range(1, elements.Length);
+            nothingCount = 0;
+        }
+
         return elements[prefabIndex];
     }
 
