@@ -15,36 +15,43 @@ public class SpawnerController : MonoBehaviour
 
     int nothingCount = 0;
 
+    [SerializeField] int maxNothing = 3;
+
+    [SerializeField] GameController gameController;
+
     void Start()
     {
-        SpawnPrefab();
+        // SpawnPrefab();
         spider = GameObject.Find("Spider").GetComponent<SpiderController>();
     }
 
     void Update()
     {
-        handleInputs();
-
-        if (!isStopped && spider.isAlive)
+        if (gameController.isPlaying)
         {
-            GameObject currentElement = elements[currentIndex];
-            ElementController elementController = currentElement.GetComponent<ElementController>();
-            float objectSpeed = elementController.moveSpeed;
+            handleInputs();
 
-            if (lastObject != null)
+            if (!isStopped && spider.isAlive)
             {
-                Renderer lastObjectRenderer = lastObject.GetComponent<Renderer>();
-                float lastObjectEndPosition = lastObject.transform.position.x + (lastObjectRenderer.bounds.size.x / 2);
-                float distanceToLastObject = transform.position.x - lastObjectEndPosition;
+                GameObject currentElement = elements[currentIndex];
+                ElementController elementController = currentElement.GetComponent<ElementController>();
+                float objectSpeed = elementController.moveSpeed;
 
-                if (distanceToLastObject > GetObjectWidth(currentElement) / 2)
+                if (lastObject != null)
+                {
+                    Renderer lastObjectRenderer = lastObject.GetComponent<Renderer>();
+                    float lastObjectEndPosition = lastObject.transform.position.x + (lastObjectRenderer.bounds.size.x / 2);
+                    float distanceToLastObject = transform.position.x - lastObjectEndPosition;
+
+                    if (distanceToLastObject > GetObjectWidth(currentElement) / 2)
+                    {
+                        SpawnPrefab();
+                    }
+                }
+                else
                 {
                     SpawnPrefab();
                 }
-            }
-            else
-            {
-                SpawnPrefab();
             }
         }
     }
@@ -90,7 +97,7 @@ public class SpawnerController : MonoBehaviour
             nothingCount = 0;
         }
 
-        if (nothingCount >= 4)
+        if (nothingCount >= maxNothing)
         {
             prefabIndex = Random.Range(1, elements.Length);
             nothingCount = 0;
@@ -118,13 +125,6 @@ public class SpawnerController : MonoBehaviour
         else
         {
             spawnPosition = new Vector3(transform.position.x + (selectedPrefabWidth / 2), transform.position.y, transform.position.z);
-        }
-        if (lastObject != null)
-        {
-            if (lastObject.tag == "Menace")
-            {
-                if (lastObject.GetComponent<MenaceController>().type == 0) lastObject.GetComponent<MenaceController>().isActive = true;
-            }
         }
         lastObject = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
     }

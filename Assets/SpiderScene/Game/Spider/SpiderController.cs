@@ -21,6 +21,8 @@ public class SpiderController : MonoBehaviour
     public bool isSafe = false;
     public bool isAlive = true;
 
+    public int killer;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -31,18 +33,24 @@ public class SpiderController : MonoBehaviour
 
     void Update()
     {
-        handleInputs();
+        if (gameController.isPlaying)
+        {
+            handleInputs();
+        }
     }
 
     void FixedUpdate()
     {
-        move();
-        if (!isStopped)
+        if (gameController.isPlaying)
         {
-            time++;
-            animator.CrossFade("run", 0.1f);
+            move();
+            if (!isStopped)
+            {
+                time++;
+                animator.CrossFade("run", 0.1f);
+            }
+            else animator.CrossFade("wait", 0.1f);
         }
-        else animator.CrossFade("wait", 0.1f);
     }
 
     void handleInputs()

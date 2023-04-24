@@ -6,7 +6,11 @@ public class GameController : MonoBehaviour
 {
 
     public float multiplier = 1;
-    [SerializeField] GameObject cam;
+    public bool isPlaying = false;
+
+    [SerializeField] CameraController cameraController;
+
+    [SerializeField] GameObject[] menaces;
 
     void FixedUpdate()
     {
@@ -14,8 +18,21 @@ public class GameController : MonoBehaviour
             multiplier += 0.0001f;
     }
 
-    public void goToLeaderboard()
+    public void gameToLeaderboard()
     {
-        cam.GetComponent<Animator>().CrossFade("GameToLeaderboard", 0.1f);
+        cameraController.gameToLeaderboard();
+    }
+
+    public void titlescreenToGame()
+    {
+        cameraController.titlescreenToGame();
+    }
+
+    public void spawnMenaces()
+    {
+        foreach (GameObject menace in menaces)
+        {
+            Instantiate(menace, new Vector3(0, 0, 0), Quaternion.identity);
+        }
     }
 }
