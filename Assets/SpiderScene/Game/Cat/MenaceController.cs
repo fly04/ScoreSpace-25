@@ -89,7 +89,7 @@ public class MenaceController : MonoBehaviour
         spider.killer = id;
         spider.die();
         animator.CrossFade("slap", 0.1f);
-        yield return new WaitForSeconds(1);
-        gameController.gameToLeaderboard();
+        StartCoroutine(gameController.gameToLeaderboard());
+        yield return null;
     }
 }
