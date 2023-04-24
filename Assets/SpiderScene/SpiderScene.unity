@@ -4027,14 +4027,14 @@ MonoBehaviour:
   - {fileID: 7444518090703584061, guid: 689cf021ec0fefe4881fce611595255d, type: 3}
   - {fileID: 3490821090293304352, guid: 3878728e04bee224cb13ca2c13d96c93, type: 3}
   spawnChances:
-  - 10
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
+  - 5
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
   isStopped: 0
   spider: {fileID: 1933765876}
   maxNothing: 3
