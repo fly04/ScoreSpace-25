@@ -12,14 +12,23 @@ public class GameController : MonoBehaviour
 
     [SerializeField] GameObject[] menaces;
 
+    [SerializeField] ScoresManager scoresManager;
+
+    void Start()
+    {
+        scoresManager = GameObject.Find("ScoresManager").GetComponent<ScoresManager>();
+    }
+
     void FixedUpdate()
     {
         if (multiplier < 3)
             multiplier += 0.0001f;
     }
 
-    public void gameToLeaderboard()
+    public IEnumerator gameToLeaderboard()
     {
+        StartCoroutine(scoresManager.RefreshLeaderboardRoutine());
+        yield return new WaitForSeconds(1);
         cameraController.gameToLeaderboard();
     }
 
