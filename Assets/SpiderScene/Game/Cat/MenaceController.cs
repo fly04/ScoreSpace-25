@@ -15,6 +15,8 @@ public class MenaceController : MonoBehaviour
 
     [SerializeField] int id = 0;
 
+
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();

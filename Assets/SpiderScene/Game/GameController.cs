@@ -14,15 +14,20 @@ public class GameController : MonoBehaviour
 
     [SerializeField] ScoresManager scoresManager;
 
+    AudioSource audioSource;
+
     void Start()
     {
         scoresManager = GameObject.Find("ScoresManager").GetComponent<ScoresManager>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
     {
-        if (multiplier < 3)
-            multiplier += 0.0001f;
+        if (isPlaying)
+        {
+            if (multiplier < 2) multiplier += 0.0001f;
+        }
     }
 
     public IEnumerator gameToLeaderboard()
@@ -30,11 +35,13 @@ public class GameController : MonoBehaviour
         StartCoroutine(scoresManager.RefreshLeaderboardRoutine());
         yield return new WaitForSeconds(1);
         cameraController.gameToLeaderboard();
+        isPlaying = false;
     }
 
     public void titlescreenToGame()
     {
         cameraController.titlescreenToGame();
+        audioSource.Play();
     }
 
     public void spawnMenaces()

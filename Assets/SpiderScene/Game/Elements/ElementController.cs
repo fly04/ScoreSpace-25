@@ -7,7 +7,7 @@ public class ElementController : MonoBehaviour
 
     [SerializeField] ScoresManager scoresManager;
     [SerializeField] bool isStopped = false;
-    public float moveSpeed = 5;
+    public float moveSpeed = 2;
     public float deadZone = -5;
     bool hasBeenCounted = false;
 

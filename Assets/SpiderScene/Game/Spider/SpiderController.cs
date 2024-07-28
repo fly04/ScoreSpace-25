@@ -20,8 +20,9 @@ public class SpiderController : MonoBehaviour
 
     public bool isSafe = false;
     public bool isAlive = true;
-
     public int killer;
+
+    AudioSource audioSource;
 
     void Start()
     {
@@ -29,6 +30,7 @@ public class SpiderController : MonoBehaviour
         animator = GetComponent<Animator>();
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         startPosition = transform.position;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -48,8 +50,20 @@ public class SpiderController : MonoBehaviour
             {
                 time++;
                 animator.CrossFade("run", 0.1f);
+                if (!audioSource.isPlaying) audioSource.Play();
             }
-            else animator.CrossFade("wait", 0.1f);
+            else
+            {
+                animator.CrossFade("wait", 0.1f);
+            }
+        }
+        else
+        {
+            animator.CrossFade("wait", 0.1f);
+        }
+        if (!isAlive)
+        {
+            animator.CrossFade("wait", 0.1f);
         }
     }
 
@@ -69,7 +83,7 @@ public class SpiderController : MonoBehaviour
     {
         if (!isStopped)
         {
-            float newYPosition = startPosition.y + Mathf.Sin(time * verticalFrequency * gameController.multiplier) * verticalAmplitude;
+            float newYPosition = startPosition.y + Mathf.Sin(time * verticalFrequency * (gameController.multiplier / 2)) * verticalAmplitude;
             transform.position = new Vector3(transform.position.x, newYPosition, transform.position.z);
         }
     }
@@ -94,5 +108,10 @@ public class SpiderController : MonoBehaviour
     {
         GetComponent<SpriteRenderer>().enabled = false;
         isAlive = false;
+    }
+
+    public void playAudio()
+    {
+        audioSource.Play();
     }
 }

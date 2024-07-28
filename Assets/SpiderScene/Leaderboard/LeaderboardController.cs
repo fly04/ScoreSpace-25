@@ -8,8 +8,6 @@ public class LeaderboardController : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI playerNames;   //là où vont être affichés les noms des joueurs du leaderboard
     [SerializeField] TextMeshProUGUI playerScores;   //là où vont être affichés les scores des joueurs du leaderboard
-
-    [SerializeField] TextMeshProUGUI playerName;   //là où va être affiché le nom du joueur
     [SerializeField] TextMeshProUGUI playerScore;   //là où va être affiché le score du joueur
     public string id = "13575"; //id du leaderboard
 
@@ -23,8 +21,8 @@ public class LeaderboardController : MonoBehaviour
         {
             if (response.success)
             {
-                string tempPlayerNames = "Names\n";
-                string tempPlayerScores = "Scores\n";
+                string tempPlayerNames = "";
+                string tempPlayerScores = "";
 
                 LootLockerLeaderboardMember[] members = response.items;
 
@@ -34,9 +32,7 @@ public class LeaderboardController : MonoBehaviour
                     //soit c'est le joueur
                     if (members[i].member_id == PlayerPrefs.GetString("PlayerID"))
                     {
-                        tempPlayerNames += "<color=#FF0000>";
                         tempPlayerNames += "You";
-                        tempPlayerNames += "</color>";
                     }
                     else
                     {
@@ -73,7 +69,6 @@ public class LeaderboardController : MonoBehaviour
                     Debug.Log("Successfully fetched player rank");
                     Debug.Log(response);
                 }
-                playerName.text = response.rank + ". You";
                 playerScore.text = response.score.ToString();
                 done = true;
             }

@@ -19,9 +19,13 @@ public class SpawnerController : MonoBehaviour
 
     [SerializeField] GameController gameController;
 
+
+    public bool isScruti = false;
+    [SerializeField] GameObject scrutiPrefab;
+    [SerializeField] GameObject scruti;
+
     void Start()
     {
-        // SpawnPrefab();
         spider = GameObject.Find("Spider").GetComponent<SpiderController>();
     }
 
@@ -53,6 +57,36 @@ public class SpawnerController : MonoBehaviour
                     SpawnPrefab();
                 }
             }
+            handleScruti();
+        }
+
+
+    }
+
+    void handleScruti()
+    {
+        if (!isScruti && isStopped)
+        {
+            Vector3 spawnPosition = new Vector3(0, 0, 0);
+            scruti = Instantiate(scrutiPrefab, spawnPosition, Quaternion.identity);
+            isScruti = true;
+        }
+
+        if (isScruti && !isStopped)
+        {
+            scruti.GetComponent<ScrutiController>().move();
+            scruti.GetComponent<ScrutiController>().pauseAnimation();
+        }
+
+        if (isScruti && isStopped)
+        {
+            scruti.GetComponent<ScrutiController>().resumeAnimation();
+        }
+
+        if (isScruti && scruti.transform.position.x < -2)
+        {
+            Destroy(scruti);
+            isScruti = false;
         }
     }
 

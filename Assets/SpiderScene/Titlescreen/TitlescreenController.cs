@@ -7,11 +7,13 @@ public class TitlescreenController : MonoBehaviour
     bool hasBeenStarted = false;
     GameController gameController;
     Animator animator;
+    AudioSource audioSource;
 
     void Start()
     {
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void OnMouseDown()
@@ -37,5 +39,10 @@ public class TitlescreenController : MonoBehaviour
             yield return new WaitForSeconds(1);
             gameController.isPlaying = true;
         }
+    }
+
+    void playSound()
+    {
+        audioSource.Play();
     }
 }
