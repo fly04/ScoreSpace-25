@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using LootLocker.Requests;
+// using LootLocker.Requests;
 
 public class LeaderboardController : MonoBehaviour
 {
@@ -13,71 +13,71 @@ public class LeaderboardController : MonoBehaviour
 
     [SerializeField] bool isDebug;
 
-    public IEnumerator FetchTopHighScoresRoutine()
-    {
-        if (isDebug) Debug.Log("Fetching high scores");
-        bool done = false;
-        LootLockerSDKManager.GetScoreList(id, 5, 0, response =>
-        {
-            if (response.success)
-            {
-                string tempPlayerNames = "";
-                string tempPlayerScores = "";
+    // public IEnumerator FetchTopHighScoresRoutine()
+    // {
+    //     if (isDebug) Debug.Log("Fetching high scores");
+    //     bool done = false;
+    //     LootLockerSDKManager.GetScoreList(id, 5, 0, response =>
+    //     {
+    //         if (response.success)
+    //         {
+    //             string tempPlayerNames = "";
+    //             string tempPlayerScores = "";
 
-                LootLockerLeaderboardMember[] members = response.items;
+    //             LootLockerLeaderboardMember[] members = response.items;
 
-                for (int i = 0; i < members.Length; i++)
-                {
-                    tempPlayerNames += i + 1 + ". ";
-                    //soit c'est le joueur
-                    if (members[i].member_id == PlayerPrefs.GetString("PlayerID"))
-                    {
-                        tempPlayerNames += "You";
-                    }
-                    else
-                    {
-                        tempPlayerNames += "Player #" + members[i].player.id;
-                    }
-                    tempPlayerScores += members[i].score + "\n";
-                    tempPlayerNames += "\n";
-                }
-                done = true;
-                playerNames.text = tempPlayerNames;
-                playerScores.text = tempPlayerScores;
-            }
-            else
-            {
-                if (isDebug) Debug.Log("Error fetching high scores");
-                done = true;
-            }
-        });
+    //             for (int i = 0; i < members.Length; i++)
+    //             {
+    //                 tempPlayerNames += i + 1 + ". ";
+    //                 //soit c'est le joueur
+    //                 if (members[i].member_id == PlayerPrefs.GetString("PlayerID"))
+    //                 {
+    //                     tempPlayerNames += "You";
+    //                 }
+    //                 else
+    //                 {
+    //                     tempPlayerNames += "Player #" + members[i].player.id;
+    //                 }
+    //                 tempPlayerScores += members[i].score + "\n";
+    //                 tempPlayerNames += "\n";
+    //             }
+    //             done = true;
+    //             playerNames.text = tempPlayerNames;
+    //             playerScores.text = tempPlayerScores;
+    //         }
+    //         else
+    //         {
+    //             if (isDebug) Debug.Log("Error fetching high scores");
+    //             done = true;
+    //         }
+    //     });
 
-        yield return new WaitWhile(() => !done);
-    }
+    //     yield return new WaitWhile(() => !done);
+    // }
 
-    public IEnumerator FetchPlayerRankRoutine()
-    {
-        if (isDebug) Debug.Log("Fetching player rank");
-        bool done = false;
-        string playerId = PlayerPrefs.GetString("PlayerID");
-        LootLockerSDKManager.GetMemberRank(id, playerId, response =>
-        {
-            if (response.success)
-            {
-                if (isDebug)
-                {
-                    Debug.Log("Successfully fetched player rank");
-                    Debug.Log(response);
-                }
-                playerScore.text = response.score.ToString();
-                done = true;
-            }
-            else
-            {
-                if (isDebug) Debug.Log("Error fetching player rank");
-                done = true;
-            }
-        });
-        yield return new WaitWhile(() => !done);
-    }
+    // public IEnumerator FetchPlayerRankRoutine()
+    // {
+    //     if (isDebug) Debug.Log("Fetching player rank");
+    //     bool done = false;
+    //     string playerId = PlayerPrefs.GetString("PlayerID");
+    //     LootLockerSDKManager.GetMemberRank(id, playerId, response =>
+    //     {
+    //         if (response.success)
+    //         {
+    //             if (isDebug)
+    //             {
+    //                 Debug.Log("Successfully fetched player rank");
+    //                 Debug.Log(response);
+    //             }
+    //             playerScore.text = response.score.ToString();
+    //             done = true;
+    //         }
+    //         else
+    //         {
+    //             if (isDebug) Debug.Log("Error fetching player rank");
+    //             done = true;
+    //         }
+    //     });
+    //     yield return new WaitWhile(() => !done);
+    // }
 }

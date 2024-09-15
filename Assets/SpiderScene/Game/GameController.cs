@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour
 
     public IEnumerator gameToLeaderboard()
     {
-        StartCoroutine(scoresManager.RefreshLeaderboardRoutine());
+        // StartCoroutine(scoresManager.RefreshLeaderboardRoutine());
         yield return new WaitForSeconds(1);
         cameraController.gameToLeaderboard();
         isPlaying = false;

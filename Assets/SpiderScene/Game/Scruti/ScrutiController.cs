@@ -48,7 +48,7 @@ public class ScrutiController : MonoBehaviour
     public void attack()
     {
         isAttacking = true;
-        spider.die();
+        spider.Die();
         animator.CrossFade("attack", 0.1f);
         StartCoroutine(gameController.gameToLeaderboard());
     }

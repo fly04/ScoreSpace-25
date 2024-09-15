@@ -13,37 +13,42 @@ public class MenaceController : MonoBehaviour
     [SerializeField] float minWait = 1f;
     [SerializeField] float maxWait = 5f;
 
-    [SerializeField] int id = 0;
+    // [SerializeField] int id = 0;
+
+    bool hasHit = false;
 
 
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         spider = GameObject.Find("Spider").GetComponent<SpiderController>();
-        animator = GetComponent<Animator>();
-        StartCoroutine(initialize());
+
+        StartCoroutine(Initialize());
     }
 
     void Update()
     {
-        if (!spider.isAlive && spider.killer != id)
+        if (!spider.isAlive && !hasHit)
         {
             StopAllCoroutines();
             animator.CrossFade("leave", 0.1f);
         }
     }
 
-    IEnumerator initialize()
+    IEnumerator Initialize()
     {
         yield return new WaitForSeconds(3);
-        StartCoroutine(waitBeforeSneak());
+        StartCoroutine(WaitBeforeSneak());
     }
 
-    IEnumerator waitBeforeSneak()
+    IEnumerator WaitBeforeSneak()
     {
         if (isDebug) Debug.Log("waiting before sneak");
+
         spriteRenderer.sortingOrder = -10;
 
         //50% chances to flipX
@@ -55,42 +60,50 @@ public class MenaceController : MonoBehaviour
         {
             spriteRenderer.flipX = false;
         }
+
         yield return new WaitForSeconds(Random.Range(minWait, maxWait));
-        StartCoroutine(sneak());
+
+        StartCoroutine(Sneak());
     }
 
-    IEnumerator sneak()
+    IEnumerator Sneak()
     {
         if (isDebug) Debug.Log("sneaking");
+
         animator.CrossFade("sneak", 0.1f);
+
         yield return new WaitForSeconds(1.5f);
 
         if (spider.isSafe)
         {
-            StartCoroutine(leave());
+            StartCoroutine(Leave());
         }
         else
         {
-            StartCoroutine(attack());
+            StartCoroutine(Attack());
         }
     }
 
-    IEnumerator leave()
+    IEnumerator Leave()
     {
         if (isDebug) Debug.Log("leaving");
+
         animator.CrossFade("leave", 0.1f);
         yield return new WaitForSeconds(.5f);
-        StartCoroutine(waitBeforeSneak());
+
+        StartCoroutine(WaitBeforeSneak());
         yield return null;
     }
 
-    IEnumerator attack()
+    IEnumerator Attack()
     {
         if (isDebug) Debug.Log("attacking");
+
         spriteRenderer.sortingOrder = 10;
-        spider.killer = id;
-        spider.die();
         animator.CrossFade("slap", 0.1f);
+
+        spider.Die();
+
         StartCoroutine(gameController.gameToLeaderboard());
         yield return null;
     }

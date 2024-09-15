@@ -71,7 +71,7 @@ public class ElementController : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            scoresManager.addScore(1);
+            // scoresManager.addScore(1);
         }
     }
 }

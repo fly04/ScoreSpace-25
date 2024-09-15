@@ -20,7 +20,6 @@ public class SpiderController : MonoBehaviour
 
     public bool isSafe = false;
     public bool isAlive = true;
-    public int killer;
 
     AudioSource audioSource;
 
@@ -104,7 +103,7 @@ public class SpiderController : MonoBehaviour
         }
     }
 
-    public void die()
+    public void Die()
     {
         GetComponent<SpriteRenderer>().enabled = false;
         isAlive = false;
